@@ -4,10 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.funmesseg.transportit.dao.UserDAO;
+import com.funmesseg.transportit.api.user.dto.UserDTO;
+import com.funmesseg.transportit.dao.user.UserDAO;
 import com.funmesseg.transportit.model.User;
 
 @RestController
@@ -22,12 +26,14 @@ public class UserAPI {
         return userDAO.getUsers();
     }
 
-    public User getUserById(int userId){
-        return null;
+    @GetMapping("/getUserById")
+    public User getUserById(@RequestParam int userId){
+        return userDAO.getUserById(userId);
     }
 
-    public void saveUser(User user){
-
+    @PostMapping("/saveUser")
+    public void saveUser(@RequestBody UserDTO userDTO){
+        userDAO.saveUser(userDTO);
     }
 
     public void deleteUser(int userId){
