@@ -333,4 +333,96 @@ GO
 ALTER TABLE [dbo].[trailer] CHECK CONSTRAINT [FK_trailer_park]
 GO
 
+CREATE TABLE [dbo].[driver](
+	[driver] [bigint] NOT NULL,
+	[firstname] [varchar](50) NOT NULL,
+	[lastname] [varchar](50) NOT NULL,
+	[dni] [bigint] NOT NULL,
+	[adress] [varchar](50) NOT NULL,
+	[province] [varchar](50) NOT NULL,
+	[city] [varchar](50) NOT NULL,
+	[phone] [bigint] NOT NULL,
+	[particular] [bit] NOT NULL,
+	[available] [bit] NOT NULL,
+	[fee] [bigint] NOT NULL,
+	[truck] [bigint] NOT NULL,
+	[currentcity] [bigint] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[driver] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 
+ALTER TABLE [dbo].[driver]  WITH CHECK ADD  CONSTRAINT [FeeTruckCityFKFomDriver] FOREIGN KEY([fee])
+REFERENCES [dbo].[fee] ([fee])
+GO
+
+ALTER TABLE [dbo].[driver] CHECK CONSTRAINT [FeeTruckCityFKFomDriver]
+GO
+
+ALTER TABLE [dbo].[driver]  WITH CHECK ADD FOREIGN KEY([currentcity])
+REFERENCES [dbo].[city] ([city])
+GO
+
+ALTER TABLE [dbo].[driver]  WITH CHECK ADD FOREIGN KEY([truck])
+REFERENCES [dbo].[truck] ([truck])
+GO
+
+CREATE TABLE [dbo].[fee](
+	[fee] [bigint] NOT NULL,
+	[kgprice] [numeric](18, 0) NOT NULL,
+	[kmprice] [numeric](18, 0) NOT NULL,
+	[feetype] [bigint] NOT NULL,
+	[cm3price] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[fee] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+CREATE TABLE [dbo].[movement](
+	[movement] [bigint] NOT NULL,
+	[amounttopay] [numeric](10, 2) NOT NULL,
+	[movementtype] [bigint] NOT NULL,
+	[driver] [bigint] NULL,
+	[routmap] [bigint] NULL,
+	[_package] [bigint] NULL,
+	[shippingrequest] [bigint] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[movement] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[movement]  WITH CHECK ADD  CONSTRAINT [DriverFKFromMovement] FOREIGN KEY([driver])
+REFERENCES [dbo].[driver] ([driver])
+GO
+
+ALTER TABLE [dbo].[movement] CHECK CONSTRAINT [DriverFKFromMovement]
+GO
+
+CREATE TABLE [dbo].[truck](
+	[truck] [bigint] NOT NULL,
+	[driver] [bigint] NOT NULL,
+	[dischargedate] [date] NOT NULL,
+	[tuition] [varchar](50) NOT NULL,
+	[maxweight] [numeric](18, 0) NOT NULL,
+	[available] [bit] NOT NULL,
+	[city] [bigint] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[truck] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[truck]  WITH CHECK ADD  CONSTRAINT [CityFKFomTruck] FOREIGN KEY([city])
+REFERENCES [dbo].[city] ([city])
+GO
+
+ALTER TABLE [dbo].[truck] CHECK CONSTRAINT [CityFKFomTruck]
+GO
