@@ -11,16 +11,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "_user")
+@Table(name = "customer")
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
-    
+public class Customer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "_user")
-    private Long user;
+    private Long customerId;
 
     @Column
     private String firstname;
@@ -28,24 +27,10 @@ public class User {
     @Column
     private String lastname;
 
-    @Column 
-    private String username;
+    @Column(columnDefinition = "bigint")
+    private String document;
 
     @Column
-    private String password;
-
-    @Column
-    private String mail;
-
-    @Column(name = "_document")
-    private Long document;
-
-    @Column(columnDefinition = "bit")
-    private boolean active;
-
-    @Override
-    public String toString(){
-        return "User: id:" + user + ", name: " + firstname + ", lastname: " + lastname;
-    }
-
+    private String address;
+    
 }
