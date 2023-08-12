@@ -1,40 +1,36 @@
 package com.funmesseg.transportit.model;
 
-
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "city")
+@Table(name = "customer")
 @Getter
 @Setter
 @NoArgsConstructor
-public class City {
-    
+public class Customer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Long cityId;
+    private Long customerId;
 
     @Column
-    private String name;
+    private String firstname;
 
-    @Override
-    public String toString(){
-        return "city: Id:" + cityId + ", name: " + name;
-    }
+    @Column
+    private String lastname;
+
+    @Column(columnDefinition = "bigint")
+    private String document;
+
+    @Column
+    private String address;
     
-    @OneToMany(mappedBy = "city")
-    private List<Package> packages;
 }

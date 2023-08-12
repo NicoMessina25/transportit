@@ -40,6 +40,9 @@ public class User {
     @Column(name = "_document")
     private Long document;
 
+    @Column(columnDefinition = "bit")
+    private boolean active;
+
     @Override
     public String toString(){
         return "User: id:" + user + ", name: " + firstname + ", lastname: " + lastname;

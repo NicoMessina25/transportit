@@ -1,14 +1,13 @@
 package com.funmesseg.transportit.model;
 
-
 import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -16,25 +15,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "city")
+@Table(name = "park")
 @Getter
 @Setter
 @NoArgsConstructor
-public class City {
+public class Park {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Long cityId;
+    private Long parkId;
 
-    @Column
-    private String name;
+    @JoinColumn(name = "cityId")
+    @ManyToOne
+    private City city;
 
-    @Override
-    public String toString(){
-        return "city: Id:" + cityId + ", name: " + name;
-    }
-    
-    @OneToMany(mappedBy = "city")
-    private List<Package> packages;
+    @OneToMany(mappedBy = "park")
+    private List<Trailer> trailers;
+
 }
