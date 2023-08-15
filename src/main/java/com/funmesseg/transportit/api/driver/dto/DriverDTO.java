@@ -24,7 +24,7 @@ public class DriverDTO {
 
     private Long dni;
     
-    private String adress;
+    private String address;
 
     private String province;
 

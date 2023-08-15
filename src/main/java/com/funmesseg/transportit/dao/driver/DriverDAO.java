@@ -34,7 +34,7 @@ public class DriverDAO {
         driver.setFirstname(driverDTO.getFirstname());
         driver.setLastname(driverDTO.getLastname());
         driver.setDni(driverDTO.getDni());
-        driver.setAdress(driverDTO.getAdress());
+        driver.setAddress(driverDTO.getAddress());
         driver.setProvince(driverDTO.getProvince());
         driver.setCity(driverDTO.getCity());
         driver.setPhone(driverDTO.getPhone());
