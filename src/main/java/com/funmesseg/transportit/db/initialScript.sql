@@ -426,3 +426,57 @@ GO
 
 ALTER TABLE [dbo].[truck] CHECK CONSTRAINT [CityFKFomTruck]
 GO
+
+
+USE [transportit]
+GO
+
+ALTER TABLE [dbo].[driver] DROP CONSTRAINT [FK__driver__currentc__4D94879B]
+GO
+
+ALTER TABLE [dbo].[driver] DROP CONSTRAINT [FeeTruckCityFKFomDriver]
+GO
+
+/****** Object:  Table [dbo].[driver]    Script Date: 14/8/2023 19:37:07 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[driver]') AND type in (N'U'))
+DROP TABLE [dbo].[driver]
+GO
+
+/****** Object:  Table [dbo].[driver]    Script Date: 14/8/2023 19:37:07 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[driver](
+	[driver] [bigint] NOT NULL,
+	[firstname] [varchar](50) NOT NULL,
+	[lastname] [varchar](50) NOT NULL,
+	[dni] [bigint] NOT NULL,
+	[adress] [varchar](50) NOT NULL,
+	[province] [varchar](50) NOT NULL,
+	[city] [varchar](50) NOT NULL,
+	[phone] [bigint] NOT NULL,
+	[particular] [bit] NOT NULL,
+	[available] [bit] NOT NULL,
+	[fee] [bigint] NOT NULL,
+	[currentcity] [bigint] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[driver] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[driver]  WITH CHECK ADD  CONSTRAINT [FeeTruckCityFKFomDriver] FOREIGN KEY([fee])
+REFERENCES [dbo].[fee] ([fee])
+GO
+
+ALTER TABLE [dbo].[driver] CHECK CONSTRAINT [FeeTruckCityFKFomDriver]
+GO
+
+ALTER TABLE [dbo].[driver]  WITH CHECK ADD FOREIGN KEY([currentcity])
+REFERENCES [dbo].[city] ([city])
+GO
+

@@ -8,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import com.funmesseg.transportit.model.enums.EMovement;
-
 @Entity
 @DiscriminatorValue(value = "2")
 @Table(name = "paymentmovement")

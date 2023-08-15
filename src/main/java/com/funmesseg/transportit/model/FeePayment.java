@@ -1,7 +1,6 @@
 package com.funmesseg.transportit.model;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +32,7 @@ public class FeePayment {
 
     @Override
     public String toString(){
-        return "User: id:" + feepayment + ", $/kg: " + kgprice + ", $/km: " + kmprice;
+        return "FeePayment: id:" + feepayment + ", $/kg: " + kgprice + ", $/km: " + kmprice;
     }
     
 }
