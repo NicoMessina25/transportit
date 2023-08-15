@@ -46,7 +46,7 @@ public class Package {
 
     @JoinColumn(name = "routeMapId")
     @ManyToOne
-    private RouteMap routMap;
+    private RouteMap routeMap;
 
     @JoinColumn(name = "feePricingId")
     @ManyToOne
