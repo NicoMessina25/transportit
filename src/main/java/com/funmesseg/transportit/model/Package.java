@@ -58,6 +58,8 @@ public class Package {
     @Column 
     private String recipientFirstname;
 
+    @Column
+    private float cityFeeCoefficient;
 
 
 }
