@@ -2,8 +2,9 @@ package com.funmesseg.transportit.api.truck.dto;
 
 import java.util.Date;
 
+import com.funmesseg.transportit.api.city.dto.CityDTO;
+import com.funmesseg.transportit.api.driver.dto.DriverDTO;
 import com.funmesseg.transportit.model.City;
-import com.funmesseg.transportit.model.Driver;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ public class TruckDTO {
 
     private Long truck;
 
-    private Driver driver;
+    private Long driverId;
 
     private Date dischargedate;
 
@@ -29,6 +30,6 @@ public class TruckDTO {
 
     private boolean available;
 
-    private City city;
+    private Long cityId;
     
 }

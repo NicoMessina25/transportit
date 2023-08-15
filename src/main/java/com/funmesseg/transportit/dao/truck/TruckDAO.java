@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.funmesseg.transportit.api.city.dto.CityDTO;
+import com.funmesseg.transportit.api.driver.dto.DriverDTO;
 import com.funmesseg.transportit.api.truck.dto.TruckDTO;
+import com.funmesseg.transportit.model.City;
+import com.funmesseg.transportit.model.Driver;
 import com.funmesseg.transportit.model.Truck;
 
 import jakarta.persistence.EntityManager;
@@ -32,16 +36,26 @@ public class TruckDAO {
 
     @Transactional
     public void saveTruck(TruckDTO truckDTO){
-        Truck truck = new Truck();
+       
+       if(truckDTO.getCityId() != null){
+            Truck truck = new Truck();
+            Driver driver = null;
 
-        truck.setDriver(truckDTO.getDriver());
-        truck.setDischargedate(truckDTO.getDischargedate());
-        truck.setTuition(truckDTO.getTuition());
-        truck.setMaxweight(truckDTO.getMaxweight());
-        truck.setAvailable(truckDTO.isAvailable());
-        truck.setCity(truckDTO.getCity());
+            if(truckDTO.getDriverId() != null)
+                driver = entityManager.getReference(Driver.class, truckDTO.getDriverId());
 
-        entityManager.persist(truck);
+            City city = entityManager.getReference(City.class, truckDTO.getCityId());
+            
+            truck.setDriver(driver);
+            truck.setDischargedate(truckDTO.getDischargedate());
+            truck.setTuition(truckDTO.getTuition());
+            truck.setMaxweight(truckDTO.getMaxweight());
+            truck.setAvailable(truckDTO.isAvailable());
+            truck.setCity(city);
+            
+
+            entityManager.persist(truck);
+        }
     }
 
     @Transactional
