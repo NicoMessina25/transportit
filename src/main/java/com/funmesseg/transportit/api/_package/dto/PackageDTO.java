@@ -2,6 +2,7 @@ package com.funmesseg.transportit.api._package.dto;
 
 import java.util.Date;
 
+import com.funmesseg.transportit.model.ShippingRequest;
 import com.funmesseg.transportit.model.enums.EShippingState;
 
 import jakarta.persistence.Column;
