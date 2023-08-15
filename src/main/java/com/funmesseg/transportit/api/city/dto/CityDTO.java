@@ -13,7 +13,6 @@ import lombok.Setter;
 public class CityDTO {
 
     private Long city;
-
     private String name;
     
 }

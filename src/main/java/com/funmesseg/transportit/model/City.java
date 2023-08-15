@@ -34,7 +34,4 @@ public class City {
     public String toString(){
         return "city: Id:" + cityId + ", name: " + name;
     }
-    
-    @OneToMany(mappedBy = "city")
-    private List<Package> packages;
 }

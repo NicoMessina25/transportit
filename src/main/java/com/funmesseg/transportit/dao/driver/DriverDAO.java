@@ -10,6 +10,7 @@ import com.funmesseg.transportit.api.driver.dto.DriverDTO;
 import com.funmesseg.transportit.api.feepayment.dto.FeePaymentDTO;
 import com.funmesseg.transportit.model.City;
 import com.funmesseg.transportit.model.Driver;
+import com.funmesseg.transportit.model.FeePayment;
 import com.funmesseg.transportit.model.Truck;
 
 import jakarta.persistence.EntityManager;
@@ -44,14 +45,14 @@ public class DriverDAO {
         driver.setParticular(driverDTO.isParticular());
         driver.setAvailable(driverDTO.isAvailable());
 
-        FeePaymentDTO feePaymentDTO = entityManager.getReference(FeePaymentDTO.class, driverDTO.getFeepaymentDTO());
+        FeePayment feePayment = entityManager.getReference(FeePayment.class, driverDTO.getFeepaymentDTO());
         List<Truck> trucks = null;
         if (driver.getTrucks() != null){
             trucks = (List<Truck>) entityManager.getReference(Truck.class, driverDTO.getTrucksid());
         }
         City currentcity = entityManager.getReference(City.class, driverDTO.getCurrentcityid());
 
-        driver.setFeepaymentDTO(feePaymentDTO);
+        driver.setFeepayment(feePayment);
         driver.setTrucks(trucks);
         driver.setCurrentcityid(currentcity);
 

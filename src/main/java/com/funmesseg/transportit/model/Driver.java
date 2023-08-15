@@ -1,6 +1,8 @@
 package com.funmesseg.transportit.model;
 
+
 import java.util.List;
+
 
 import com.funmesseg.transportit.api.feepayment.dto.FeePaymentDTO;
 
@@ -11,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -59,10 +62,9 @@ public class Driver {
 
     @JoinColumn(name = "fee")
     @ManyToOne
-    private FeePaymentDTO feepaymentDTO;
+    private FeePayment feepayment;
 
-    @JoinColumn(name = "truck")
-    @ManyToOne
+    @OneToMany(mappedBy = "driver")
     private List<Truck> trucks;
 
     @JoinColumn(name = "currentcity")

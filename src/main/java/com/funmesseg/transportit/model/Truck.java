@@ -26,7 +26,8 @@ public class Truck {
     @Column
     private Long truck;
 
-    @Column
+    @JoinColumn(name = "driver")
+    @ManyToOne
     private Driver driver;
 
     @Column
