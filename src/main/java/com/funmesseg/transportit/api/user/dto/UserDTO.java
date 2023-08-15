@@ -1,6 +1,5 @@
 package com.funmesseg.transportit.api.user.dto;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

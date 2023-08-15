@@ -21,18 +21,18 @@ public class FeePaymentDAO {
     private EntityManager entityManager;
     
     @Transactional(readOnly = true)
-    public List<FeePayment> getFeePayments(){
-        return entityManager.createQuery("from feepayment", FeePayment.class).getResultList();
+    public List<FeePaymentDTO> getFeePayments(){
+        return entityManager.createQuery("from feepayment", FeePaymentDTO.class).getResultList();
     }
 
     @Transactional(readOnly = true)
-    public FeePayment getFeePaymentById(int feePaymentId){
-        return entityManager.find(FeePayment.class, feePaymentId);
+    public FeePaymentDTO getFeePaymentById(int feePaymentId){
+        return entityManager.find(FeePaymentDTO.class, feePaymentId);
     }
 
     @Transactional
     public void saveFeePayment(FeePaymentDTO feePaymentDTO){
-        FeePayment feePayment = new FeePayment();
+        FeePaymentDTO feePayment = new FeePaymentDTO();
 
         feePayment.setKgprice(feePaymentDTO.getKgprice());
         feePayment.setKmprice(feePaymentDTO.getKmprice());

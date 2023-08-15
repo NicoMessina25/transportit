@@ -1,7 +1,10 @@
 package com.funmesseg.transportit.api.driver.dto;
 
+import java.util.List;
+
+import com.funmesseg.transportit.api.feepayment.dto.FeePaymentDTO;
+import com.funmesseg.transportit.api.truck.dto.TruckDTO;
 import com.funmesseg.transportit.model.City;
-import com.funmesseg.transportit.model.FeePayment;
 import com.funmesseg.transportit.model.Truck;
 
 import jakarta.persistence.Column;
@@ -9,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Getter
 @Setter
@@ -36,10 +40,10 @@ public class DriverDTO {
 
     private boolean available;
 
-    private FeePayment feepayment;
+    private FeePaymentDTO feepaymentDTO;
 
-    private Truck truck;
+    private List<Long> trucksid;
 
-    private City currentcity;
+    private Long currentcityid;
 
 }

@@ -3,6 +3,8 @@ package com.funmesseg.transportit.api.driver;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,13 +24,13 @@ public class DriverAPI {
     private DriverDAO driverDAO;
 
     @GetMapping(value = "/getDrivers")
-    public List<Driver> getDrivers(){
-        return driverDAO.getDrivers();
+    public ResponseEntity<List<Driver>> getDrivers(){
+        return new ResponseEntity<>(driverDAO.getDrivers(), HttpStatus.OK);
     }
 
     @GetMapping("/getDriverById")
-    public Driver getDriverById(@RequestParam int driverId){
-        return driverDAO.getDriverById(driverId);
+    public ResponseEntity<Driver> getDriverById(@RequestParam int driverId){
+        return new ResponseEntity<>(driverDAO.getDriverById(driverId), HttpStatus.OK);
     }
 
     @PostMapping("/saveUser")

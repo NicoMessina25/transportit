@@ -3,6 +3,8 @@ package com.funmesseg.transportit.api.feepayment;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.funmesseg.transportit.api.feepayment.dto.FeePaymentDTO;
 import com.funmesseg.transportit.dao.feepayment.FeePaymentDAO;
-import com.funmesseg.transportit.model.FeePayment;
 
 @RestController
 @RequestMapping("/api/feepayment")
@@ -22,13 +23,13 @@ public class FeePaymentAPI {
     private FeePaymentDAO feePaymentDAO;
     
     @GetMapping(value = "/getFeePayments")
-    public List<FeePayment> getFeePayments(){
-        return feePaymentDAO.getFeePayments();
+    public ResponseEntity<List<FeePaymentDTO>> getFeePayments(){
+        return new ResponseEntity<>(feePaymentDAO.getFeePayments(), HttpStatus.OK);
     }
 
     @GetMapping("/getFeePaymentById")
-    public FeePayment getFeePaymentById(@RequestParam int feePaymentId){
-        return feePaymentDAO.getFeePaymentById(feePaymentId);
+    public ResponseEntity<FeePaymentDTO> getFeePaymentById(@RequestParam int feePaymentId){
+        return new ResponseEntity<>(feePaymentDAO.getFeePaymentById(feePaymentId), HttpStatus.OK);
     }
 
     @PostMapping("/saveFeePayment")

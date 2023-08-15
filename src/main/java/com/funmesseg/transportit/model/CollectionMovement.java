@@ -1,7 +1,5 @@
 package com.funmesseg.transportit.model;
 
-import com.funmesseg.transportit.model.enums.EMovement;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -9,8 +7,6 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import com.funmesseg.transportit.model.enums.EMovement;
 
 @Entity
 @DiscriminatorValue(value = "1")

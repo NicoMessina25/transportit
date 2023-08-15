@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.funmesseg.transportit.api.driver.dto.DriverDTO;
+import com.funmesseg.transportit.api.feepayment.dto.FeePaymentDTO;
+import com.funmesseg.transportit.model.City;
 import com.funmesseg.transportit.model.Driver;
+import com.funmesseg.transportit.model.Truck;
 
 import jakarta.persistence.EntityManager;
 
@@ -40,15 +43,23 @@ public class DriverDAO {
         driver.setPhone(driverDTO.getPhone());
         driver.setParticular(driverDTO.isParticular());
         driver.setAvailable(driverDTO.isAvailable());
-        driver.setFeepayment(driverDTO.getFeepayment());
-        driver.setTruck(driverDTO.getTruck());
-        driver.setCurrentcity(driverDTO.getCurrentcity());
+
+        FeePaymentDTO feePaymentDTO = entityManager.getReference(FeePaymentDTO.class, driverDTO.getFeepaymentDTO());
+        List<Truck> trucks = null;
+        if (driver.getTrucks() != null){
+            trucks = (List<Truck>) entityManager.getReference(Truck.class, driverDTO.getTrucksid());
+        }
+        City currentcity = entityManager.getReference(City.class, driverDTO.getCurrentcityid());
+
+        driver.setFeepaymentDTO(feePaymentDTO);
+        driver.setTrucks(trucks);
+        driver.setCurrentcityid(currentcity);
 
         entityManager.persist(driver);
     }
 
     @Transactional
-    public void deleteDriver(int userId){
+    public void deleteDriver(int driverId){
 
     }
 

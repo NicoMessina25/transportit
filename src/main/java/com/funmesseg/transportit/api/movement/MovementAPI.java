@@ -3,6 +3,8 @@ package com.funmesseg.transportit.api.movement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,13 +24,13 @@ public class MovementAPI {
     private MovementDAO movementDAO;
     
     @GetMapping(value = "/getMovements")
-    public List<Movement> getMovements(){
-        return movementDAO.getMovements();
+    public ResponseEntity<List<Movement>> getMovements(){
+        return new ResponseEntity<>(movementDAO.getMovements(), HttpStatus.OK);
     }
 
     @GetMapping("/getMovementById")
-    public Movement getMovementById(@RequestParam int movementId){
-        return movementDAO.getMovementById(movementId);
+    public ResponseEntity<Movement> getMovementById(@RequestParam int movementId){
+        return new ResponseEntity<>(movementDAO.getMovementById(movementId), HttpStatus.OK);
     }
 
     @PostMapping("/saveMovement")

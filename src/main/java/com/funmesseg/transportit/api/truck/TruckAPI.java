@@ -3,6 +3,8 @@ package com.funmesseg.transportit.api.truck;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,13 +24,13 @@ public class TruckAPI {
     private TruckDAO truckDAO;
     
     @GetMapping(value = "/getTruck")
-    public List<Truck> getTrucks(){
-        return truckDAO.getTrucks();
+    public ResponseEntity<List<Truck>> getTrucks(){
+        return new ResponseEntity<>(truckDAO.getTrucks(), HttpStatus.OK);
     }
 
     @GetMapping("/getTruckById")
-    public Truck getTruckById(@RequestParam int truckId){
-        return truckDAO.getTruckById(truckId);
+    public ResponseEntity<Truck> getTruckById(@RequestParam int truckId){
+        return new ResponseEntity<>(truckDAO.getTruckById(truckId), HttpStatus.OK);
     }
 
     @PostMapping("/saveTruck")
