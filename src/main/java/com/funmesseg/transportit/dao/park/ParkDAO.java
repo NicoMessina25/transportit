@@ -7,11 +7,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.funmesseg.transportit.api.park.dto.ParkDTO;
-import com.funmesseg.transportit.api.user.dto.UserDTO;
 import com.funmesseg.transportit.model.City;
 import com.funmesseg.transportit.model.Park;
 import com.funmesseg.transportit.model.Trailer;
-import com.funmesseg.transportit.model.User;
 
 import jakarta.persistence.EntityManager;
 

@@ -1,4 +1,4 @@
-package com.funmesseg.transportit.api.package;
+package com.funmesseg.transportit.api._package;
 
 import java.util.List;
 

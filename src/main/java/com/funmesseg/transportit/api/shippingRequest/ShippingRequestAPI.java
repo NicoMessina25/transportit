@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.funmesseg.transportit.api.shippingRequest.dto.ShippingRequestDTO;
-import com.funmesseg.transportit.api.user.dto.UserDTO;
 import com.funmesseg.transportit.dao.shippingRequest.ShippingRequestDAO;
 import com.funmesseg.transportit.model.ShippingRequest;
 import com.funmesseg.transportit.model.User;
