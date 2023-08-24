@@ -1,5 +1,8 @@
 package com.funmesseg.transportit.model;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,8 +43,8 @@ public class User {
     @Column(name = "_document")
     private Long document;
 
-    @Column(columnDefinition = "bit")
-    private boolean active;
+    @Column
+    private LocalDateTime deleted;
 
     @Override
     public String toString(){

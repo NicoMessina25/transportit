@@ -1,12 +1,15 @@
 package com.funmesseg.transportit.dao.user;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.funmesseg.transportit.api.user.dto.UserDTO;
+import com.funmesseg.transportit.api.user.dto.UserRequest;
 import com.funmesseg.transportit.model.User;
 
 import jakarta.persistence.EntityManager;
@@ -19,31 +22,45 @@ public class UserDAO {
     
     @Transactional(readOnly = true)
     public List<User> getUsers(){
-        return entityManager.createQuery("from User", User.class).getResultList();
+        return entityManager.createQuery("from User where deleted IS NULL", User.class).getResultList();
     }
 
     @Transactional(readOnly = true)
-    public User getUserById(int userId){
+    public User getUserById(Long userId){
         return entityManager.find(User.class, userId);
     }
 
     @Transactional
-    public void saveUser(UserDTO userDTO){
-        User user = new User();
-
-        user.setFirstname(userDTO.getFirstname());
-        user.setLastname(userDTO.getLastname());
-        user.setDocument(userDTO.getDocument());
-        user.setMail(userDTO.getMail());
-        user.setPassword(userDTO.getPassword());
-        user.setUsername(userDTO.getUsername());
-
-        entityManager.persist(user);
+    public void saveUser(UserRequest userRequest){
+        entityManager.persist(getUserFromRequest(null, userRequest));
     }
 
     @Transactional
-    public void deleteUser(int userId){
+    public void updateUser(Long id, UserRequest userRequest){
+        entityManager.merge(getUserFromRequest(id, userRequest));
+    }
 
+    private User getUserFromRequest(Long id, UserRequest userRequest){
+        User user;
+        if(id == null)
+            user = new User();
+        else user = entityManager.find(User.class, id);
+
+        user.setDocument(userRequest.document());
+        user.setFirstname(userRequest.firstname());
+        user.setLastname(userRequest.lastname());
+        user.setMail(userRequest.mail());
+        user.setUsername(userRequest.username());
+        user.setPassword(userRequest.password());
+
+        return user;
+    }
+
+    @Transactional
+    public void deleteUser(Long id){
+        User u = entityManager.getReference(User.class, id);
+        u.setDeleted(LocalDateTime.now());
+        entityManager.merge(u);
     }
 
 }
